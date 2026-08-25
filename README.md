@@ -1,35 +1,50 @@
-This is a Kotlin Multiplatform project targeting Android, iOS, Desktop (JVM).
+# Sudoku Game & Solver Application (Android, IOS, Desktop)
 
-* [/iosApp](./iosApp/iosApp) contains an iOS application. Even if you’re sharing your UI with Compose Multiplatform,
-  you need this entry point for your iOS app. This is also where you should add SwiftUI code for your project.
-
-* [/shared](./shared/src) is for code that will be shared across your Compose Multiplatform applications.
-  It contains several subfolders:
-  - [commonMain](./shared/src/commonMain/kotlin) is for code that’s common for all targets.
-  - Other folders are for Kotlin code that will be compiled for only the platform indicated in the folder name.
-    For example, if you want to use Apple’s CoreCrypto for the iOS part of your Kotlin app,
-    the [iosMain](./shared/src/iosMain/kotlin) folder would be the right place for such calls.
-    Similarly, if you want to edit the Desktop (JVM) specific part, the [jvmMain](./shared/src/jvmMain/kotlin)
-    folder is the appropriate location.
-
-### Running the apps
-
-Use the run configurations provided by the run widget in your IDE's toolbar. You can also use these commands and options:
-
-- Android app: `./gradlew :androidApp:assembleDebug`
-- Desktop app:
-  - Hot reload: `./gradlew :desktopApp:hotRun --auto`
-  - Standard run: `./gradlew :desktopApp:run`
-- iOS app: open the [/iosApp](./iosApp) directory in Xcode and run it from there.
-
-### Running tests
-
-Use the run button in your IDE's editor gutter, or run tests using Gradle tasks:
-
-- Android tests: `./gradlew :shared:testAndroidHostTest`
-- Desktop tests: `./gradlew :shared:jvmTest`
-- iOS tests: `./gradlew :shared:iosSimulatorArm64Test`
+## 1. Description
+**Sudoku App** is a feature-rich, cross-platform Sudoku puzzle game and solver application built using Kotlin Multiplatform (KMP) and Compose Multiplatform. Cross-compiling for Android, iOS, and Desktop (JVM), sudokuapp offers interactive puzzle solving, automatic puzzle generation across difficulty levels, step-by-step algorithmic solving visualization, victory animations, and extensive automated test suites.
 
 ---
 
-Learn more about [Kotlin Multiplatform](https://www.jetbrains.com/help/kotlin-multiplatform-dev/get-started.html)…
+## 2. Technical Special Aspects
+- **Backtracking Solver & Generator Engine**:
+  - **`SudokuGenerator`**: Generates unique, solvable 9x9 Sudoku puzzles with symmetric clue removal across Easy, Medium, Hard, and Expert difficulties.
+  - **`SudokuSolver`**: Implements a constraint-satisfaction backtracking algorithm capable of instant solutions or step-by-step visual solving transitions (`SudokuSolverScreenViewModel`).
+- **Rich Composable UI Architecture**:
+  - `SudokuBoard`: Touch-responsive 9x9 cell grid with highlight states for selected cells, rows, columns, and matching numbers.
+  - `Confetti`: Custom canvas-rendered particle confetti animation for game completion.
+  - `CustomOverlayScene`: Transition scene overlay architecture for victory/defeat dialogs (`GameWonDialogScreen`, `GameOverDialogScreen`).
+- **Comprehensive Testing Infrastructure (`common-test-utils`)**:
+  - Dedicated multiplatform testing module featuring custom dispatcher rules (`MainDispatcherRule`), Robolectric host integration, Turbine reactive flow testing, and headless video-recording UI test runners (`SudokuSolverScreenVideoTest`).
+  - Microbenchmarking suite (`benchmark` module) evaluating solver algorithm execution times.
+
+---
+
+## 3. Technologies Used
+- **Languages**: Kotlin (100% Shared UI & Business Logic)
+- **UI Framework**: Compose Multiplatform (Android, iOS, Desktop)
+- **Navigation**: Jetpack Navigation 3 
+- **Dependency Injection**: Koin Compiler Plugin (`CoreModule`, `NavigationModule`, etc.,)
+- **State & Concurrency**: Kotlin Coroutines, StateFlow, ViewModel
+- **Build Infrastructure**: Gradle KTS Multi-Module (`shared`, `androidApp`, `desktopApp`, `iosApp`, `common-test-utils`, `androidUiTest`, `benchmark`)
+
+---
+
+## 4. Testing Technologies
+- **Unit & Logic Testing**: `kotlin.test`, JUnit 5
+- **Flow & Reactive Testing**: Turbine (`TurbineFlowTest`)
+- **Android Host & UI Testing**: Robolectric (`RobolectricTest`), AndroidX Test (`androidUiTest`)
+- **Visual & Video Testing**: Headless video recording test runners (`SudokuSolverScreenVideoTest`)
+- **Performance Benchmarking**: AndroidX Benchmark library (`benchmark`)
+
+---
+
+## 5. Cloud Technologies
+- N/A (Standalone cross-platform game application).
+
+---
+
+## 6. ROADMAP
+- [ ] Implement camera OCR scanner to scan physical paper Sudoku puzzles into the app using computer vision.
+- [ ] Add candidate digit "pencil marking" mode for manual puzzle solving.
+- [ ] Introduce Daily Challenge puzzles with online cloud backup and streak statistics.
+- [ ] Support puzzle variants including 6x6 Mini Sudoku, 16x16 Hexadoku, and Samurai Sudoku.
