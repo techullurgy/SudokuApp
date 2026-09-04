@@ -1,50 +1,92 @@
-# Sudoku Game & Solver Application (Android, IOS, Desktop)
+# Sudoku Game & Solver
 
-## 1. Description
-**Sudoku App** is a feature-rich, cross-platform Sudoku puzzle game and solver application built using Kotlin Multiplatform (KMP) and Compose Multiplatform. Cross-compiling for Android, iOS, and Desktop (JVM), sudokuapp offers interactive puzzle solving, automatic puzzle generation across difficulty levels, step-by-step algorithmic solving visualization, victory animations, and extensive automated test suites.
+A modern, cross-platform Sudoku application built with **Kotlin Multiplatform** and **Compose Multiplatform**, delivering a consistent user experience across **Android**, **iOS**, and **Desktop**. The application combines an intuitive Sudoku gameplay experience with a powerful solving engine, allowing users to play, analyze, validate, and solve puzzles efficiently.
 
----
-
-## 2. Technical Special Aspects
-- **Backtracking Solver & Generator Engine**:
-  - **`SudokuGenerator`**: Generates unique, solvable 9x9 Sudoku puzzles with symmetric clue removal across Easy, Medium, Hard, and Expert difficulties.
-  - **`SudokuSolver`**: Implements a constraint-satisfaction backtracking algorithm capable of instant solutions or step-by-step visual solving transitions (`SudokuSolverScreenViewModel`).
-- **Rich Composable UI Architecture**:
-  - `SudokuBoard`: Touch-responsive 9x9 cell grid with highlight states for selected cells, rows, columns, and matching numbers.
-  - `Confetti`: Custom canvas-rendered particle confetti animation for game completion.
-  - `CustomOverlayScene`: Transition scene overlay architecture for victory/defeat dialogs (`GameWonDialogScreen`, `GameOverDialogScreen`).
-- **Comprehensive Testing Infrastructure (`common-test-utils`)**:
-  - Dedicated multiplatform testing module featuring custom dispatcher rules (`MainDispatcherRule`), Robolectric host integration, Turbine reactive flow testing, and headless video-recording UI test runners (`SudokuSolverScreenVideoTest`).
-  - Microbenchmarking suite (`benchmark` module) evaluating solver algorithm execution times.
+Designed with a modular and scalable architecture, the project demonstrates how a single Kotlin codebase can power multiple platforms while maintaining native performance and platform-specific integrations.
 
 ---
 
-## 3. Technologies Used
-- **Languages**: Kotlin (100% Shared UI & Business Logic)
-- **UI Framework**: Compose Multiplatform (Android, iOS, Desktop)
-- **Navigation**: Jetpack Navigation 3 
-- **Dependency Injection**: Koin Compiler Plugin (`CoreModule`, `NavigationModule`, etc.,)
-- **State & Concurrency**: Kotlin Coroutines, StateFlow, ViewModel
-- **Build Infrastructure**: Gradle KTS Multi-Module (`shared`, `androidApp`, `desktopApp`, `iosApp`, `common-test-utils`, `androidUiTest`, `benchmark`)
+## Highlights
+
+- **Cross-Platform Application**
+  - Shared business logic across Android, iOS, and Desktop.
+  - Platform-specific implementations only where required.
+
+- **Sudoku Gameplay**
+  - Interactive Sudoku board.
+  - Multiple puzzle difficulty levels.
+  - Input validation and mistake detection.
+  - Notes (pencil marks) support.
+  - Undo and redo functionality.
+  - Puzzle reset and restart.
+
+- **Sudoku Solver**
+  - Automatically solves valid Sudoku puzzles.
+  - Step-by-step solving logic.
+  - Board validation before solving.
+  - Handles partially completed puzzles.
+
+- **Modern UI**
+  - Built entirely with Compose Multiplatform.
+  - Responsive layouts for different screen sizes.
+  - Smooth animations and state-driven UI.
 
 ---
 
-## 4. Testing Technologies
-- **Unit & Logic Testing**: `kotlin.test`, JUnit 5
-- **Flow & Reactive Testing**: Turbine (`TurbineFlowTest`)
-- **Android Host & UI Testing**: Robolectric (`RobolectricTest`), AndroidX Test (`androidUiTest`)
-- **Visual & Video Testing**: Headless video recording test runners (`SudokuSolverScreenVideoTest`)
-- **Performance Benchmarking**: AndroidX Benchmark library (`benchmark`)
+## Architecture
+
+The project follows a clean, modular architecture that separates presentation, business logic, and platform-specific implementations.
+
+### Core Technologies
+
+- **Kotlin Multiplatform (KMP)**
+  - Shared domain and business logic.
+  - Platform-specific implementations where necessary.
+
+- **Compose Multiplatform (CMP)**
+  - Declarative UI shared across Android, iOS, and Desktop.
+  - Consistent user experience with minimal duplicated code.
+
+- **Koin**
+  - Dependency Injection for shared and platform modules.
+  - Simplifies dependency management and improves testability.
+
+- **Jetpack Navigation 3**
+  - Type-safe navigation.
+  - Modular navigation graph.
+  - Predictable navigation state.
+
+- **Android Gradle Plugin (AGP) 9+**
+  - Modern Android build configuration.
+  - Improved build performance and tooling support.
 
 ---
 
-## 5. Cloud Technologies
-- N/A (Standalone cross-platform game application).
+## Technical Focus
+
+This project focuses on building a production-ready multiplatform application by emphasizing:
+
+- Clean architecture principles.
+- Shared business logic across platforms.
+- Reactive UI with state management.
+- Dependency Injection using Koin.
+- Modular project organization.
+- Navigation using the latest Navigation 3 APIs.
+- Maintainable and scalable codebase.
 
 ---
 
-## 6. ROADMAP
-- [ ] Implement camera OCR scanner to scan physical paper Sudoku puzzles into the app using computer vision.
-- [ ] Add candidate digit "pencil marking" mode for manual puzzle solving.
-- [ ] Introduce Daily Challenge puzzles with online cloud backup and streak statistics.
-- [ ] Support puzzle variants including 6x6 Mini Sudoku, 16x16 Hexadoku, and Samurai Sudoku.
+## Skills Demonstrated
+
+- Kotlin Multiplatform Development
+- Compose Multiplatform UI
+- Android Application Development
+- iOS Application Development
+- Desktop Application Development
+- Dependency Injection with Koin
+- Navigation Architecture
+- State Management
+- Clean Architecture
+- Modular Project Structure
+- Algorithm Implementation
+- Cross-Platform Software Engineering
